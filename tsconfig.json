@@ -1,6 +1,10 @@
 {
 	"compilerOptions": {
 		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@bootstrap": ["./node_modules/bootstrap/scss"]
+		},
 		"types": ["node"],
 		"target": "ESNext",
 		"useDefineForClassFields": true,
