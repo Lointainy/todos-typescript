@@ -1,10 +1,10 @@
 /* Types */
 import { todoType } from './types'
 
-const addButton = document.querySelector<HTMLButtonElement>('.btn__add')
+const addButton = document.querySelector<HTMLButtonElement>('.todo__btn-add')
 const todoName = document.querySelector<HTMLInputElement>('.todo__name')
-const todoList = document.querySelector<HTMLUListElement>('.todo__list')
-const todoCategory = document.querySelector<HTMLSelectElement>('.todo__categoty')
+const todoList = document.querySelector<HTMLUListElement>('.todos-list')
+const todoCategory = document.querySelector<HTMLSelectElement>('.todo__category')
 
 /* Store */
 let todos: todoType[] = []
@@ -41,12 +41,12 @@ function handleAddTodo() {
 		let todoId = getRandomId()
 
 		todoList!.innerHTML += `
-		<li id="${todoId}">
-		<input type="checkbox" class="todo__status">
-		<input type="text" value="${todoName!.value}" readonly class="todo__title"/>
+		<li id="${todoId}" class="todos-list__item">
+		<input type="checkbox" class="item__status">
+		<input type="text" value="${todoName!.value}" readonly class="item__title"/>
 		<span>${selectedCategory()}</span>
-		<button type="button" class="btn__edit">edit</button>
-		<button type="button" class="btn__remove">remove</button>
+		<button type="button" class="item__btn-edit">edit</button>
+		<button type="button" class="item__btn-remove">remove</button>
 		</li>`
 
 		todos = [...todos, { title: todoName!.value, id: todoId, status: false, category: selectedCategory() }] // push new TODO
@@ -59,16 +59,16 @@ function handleAddTodo() {
 /* CHANGE for TODO */
 function handleChangeTodo({ target }: any) {
 	/* If remove TODO */
-	if (target.classList[0] === 'btn__remove') {
+	if (target.classList[0] === 'item__btn-remove') {
 		todos = todos.filter((i) => i.id != target.parentElement.id) // add filter TODOS
 		setLocalTodos() // set to local
 		todoList?.removeChild(document.getElementById(target.parentElement.id) as HTMLElement)
 	} // remove TODO from todos and set localstorage
 
 	/* If edit TODO */
-	if (target.classList[0] == 'btn__edit') {
+	if (target.classList[0] == 'item__btn-edit') {
 		for (let todo of target.parentElement.children) {
-			if (todo.className == 'todo__title') {
+			if (todo.className == 'item__title') {
 				todo.readOnly = !todo.readOnly
 				target.innerText = !todo.readOnly ? 'close' : 'edit' // toggle title for EDIT button
 				todos = todos.map((item) => (item.id == target.parentElement.id ? { ...item, title: todo.value } : item)) // add change for selected TODO
@@ -78,9 +78,9 @@ function handleChangeTodo({ target }: any) {
 	}
 
 	/* If change TODO status */
-	if (target.classList[0] == 'todo__status') {
+	if (target.classList[0] == 'item__status') {
 		for (let todo of target.parentElement.children) {
-			if (todo.className == 'todo__status') {
+			if (todo.className == 'item__status') {
 				todos = todos.map((item) => (item.id == target.parentElement.id ? { ...item, status: todo.checked } : item)) // add change status for selected TODO
 			}
 		}
@@ -91,7 +91,7 @@ function handleChangeTodo({ target }: any) {
 function onMounted() {
 	/* Create category after loaded document */
 	for (let categoryItem of category) {
-		todoCategory!.innerHTML += `<option id="${getRandomId()}" value="${categoryItem}">${categoryItem} </option>>`
+		todoCategory!.innerHTML += `<option id="${getRandomId()}" value="${categoryItem}">${categoryItem} </option>`
 	}
 
 	/* Get elemet from localStorage */
@@ -107,12 +107,13 @@ function getTodos() {
 	/* Create TODOS if localstorage is not empty */
 	for (let todo of todos) {
 		todoList!.innerHTML += `
-		<li id="${todo.id}">
-			<input type="checkbox" class="todo__status" ${todo.status ? 'checked' : ''}>
-   			 <input type="text" value="${todo.title}" readonly class="todo__title"/>
+		<li id="${todo.id}" class="todos-list__item">
+			<input type="checkbox" class="item__status" ${todo.status ? 'checked' : ''}>
+   			 <input type="text" value="${todo.title}" readonly class="item__title"/>
 			<span>${todo.category}</span>
-    		<button type="button" class="btn__edit">edit</button>
-    		<button type="button" class="btn__remove">remove</button>
+    		<button type="button" class="item__btn-edit">edit</button>
+    		<button type="button" class="item__btn-remove">remove</button>
 		</li>`
 	}
 }
+
