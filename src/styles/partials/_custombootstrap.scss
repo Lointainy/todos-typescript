@@ -1,0 +1,10 @@
+$container-max-widths: (
+	sm: 340px,
+	md: 480px,
+	lg: 540px,
+	xl: 680px,
+	xxl: 720px
+);
+
+@import '@bootstrap/bootstrap';
+

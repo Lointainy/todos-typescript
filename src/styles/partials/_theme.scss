@@ -1,0 +1,16 @@
+:root {
+	--background-color: #{$color-silver-light};
+	--field-color: #{$color-white};
+	--text-color: #{$color-purrple-blue};
+	--unactive-color: #{$color-silver-dark};
+	--box-shadow: #{$box-shadow-light};
+}
+
+:root.dark-theme {
+	--field-color: #{$color-dark-blue};
+	--background-color: #{$color-dark};
+	--text-color: #{$color-light};
+	--unactive-color: #{$color-purrple-blue};
+	--box-shadow: #{$box-shadow-dark};
+}
+
