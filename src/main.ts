@@ -76,6 +76,7 @@ function handleChangeTodo({ target }: any) {
 			if (todo.className == 'item__title') {
 				todo.readOnly = !todo.readOnly
 				target.innerText = !todo.readOnly ? 'close' : 'edit' // toggle title for EDIT button
+				!todo.readOnly ? todo.focus() : ''
 				todos = todos.map((item) => (item.id == target.parentElement.id ? { ...item, title: todo.value } : item)) // add change for selected TODO
 			}
 		}
