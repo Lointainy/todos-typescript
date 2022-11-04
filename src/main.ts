@@ -1,3 +1,5 @@
+import { setTheme, toggleTheme } from './theme'
+
 /* Types */
 import { todoType } from './types'
 
@@ -5,6 +7,7 @@ const addButton = document.querySelector<HTMLButtonElement>('.todo__btn-add')
 const todoName = document.querySelector<HTMLInputElement>('.todo__name')
 const todoList = document.querySelector<HTMLUListElement>('.todos-list')
 const todoCategory = document.querySelector<HTMLSelectElement>('.todo__category')
+const toggleThemeButton = document.querySelector<HTMLButtonElement>('.header-menu__theme')
 
 /* Store */
 let todos: todoType[] = []
@@ -14,6 +17,8 @@ let category: string[] = ['work', 'home', 'other']
 todoCategory?.addEventListener('change', selectedCategory)
 addButton?.addEventListener('click', handleAddTodo)
 todoList?.addEventListener('click', handleChangeTodo)
+
+toggleThemeButton?.addEventListener('click', toggleTheme)
 document.addEventListener('DOMContentLoaded', onMounted)
 
 /* FUNCTIONS */
@@ -35,18 +40,18 @@ const getLocalTodos = () => {
 
 /* ADD TODO */
 function handleAddTodo() {
-	todoName!.value.length < 1 ? (addButton!.innerText = 'small title') : (addButton!.innerText = 'add todo')
+	todoName!.value.length < 1 ? (todoName!.placeholder = 'small title') : (todoName!.placeholder = 'add new todos')
 
 	if (todoName!.value.length >= 1) {
 		let todoId = getRandomId()
 
 		todoList!.innerHTML += `
 		<li id="${todoId}" class="todos-list__item">
-		<input type="checkbox" class="item__status">
-		<input type="text" value="${todoName!.value}" readonly class="item__title"/>
-		<span>${selectedCategory()}</span>
-		<button type="button" class="item__btn-edit">edit</button>
-		<button type="button" class="item__btn-remove">remove</button>
+			<input type="checkbox" class="item__status">
+			<input type="text" value="${todoName!.value}" readonly class="item__title"/>
+			<span>${selectedCategory()}</span>
+			<button type="button" class="item__btn-edit btn">edit</button>
+			<button type="button" class="item__btn-remove btn">remove</button>
 		</li>`
 
 		todos = [...todos, { title: todoName!.value, id: todoId, status: false, category: selectedCategory() }] // push new TODO
@@ -94,6 +99,8 @@ function onMounted() {
 		todoCategory!.innerHTML += `<option id="${getRandomId()}" value="${categoryItem}">${categoryItem} </option>`
 	}
 
+	setTheme()
+
 	/* Get elemet from localStorage */
 	if (getLocalTodos() === null) {
 		todos = []
@@ -109,10 +116,10 @@ function getTodos() {
 		todoList!.innerHTML += `
 		<li id="${todo.id}" class="todos-list__item">
 			<input type="checkbox" class="item__status" ${todo.status ? 'checked' : ''}>
-   			 <input type="text" value="${todo.title}" readonly class="item__title"/>
+   			<input type="text" value="${todo.title}" readonly class="item__title"/>
 			<span>${todo.category}</span>
-    		<button type="button" class="item__btn-edit">edit</button>
-    		<button type="button" class="item__btn-remove">remove</button>
+    		<button type="button" class="item__btn-edit btn">edit</button>
+    		<button type="button" class="item__btn-remove btn">remove</button>
 		</li>`
 	}
 }
