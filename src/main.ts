@@ -87,6 +87,7 @@ function handleChangeTodo({ target }: any) {
 	if (target.classList[0] == 'item__status') {
 		for (let todo of target.parentElement.children) {
 			if (todo.className == 'item__status') {
+				target.parentElement.classList.toggle('checked')
 				todos = todos.map((item) => (item.id == target.parentElement.id ? { ...item, status: todo.checked } : item)) // add change status for selected TODO
 			}
 		}

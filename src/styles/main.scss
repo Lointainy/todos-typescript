@@ -125,19 +125,31 @@ li {
 				cursor: pointer;
 
 				&:before {
+					transition: $animate;
 					position: absolute;
 					top: 0;
 					content: '';
 					height: 24px;
 					width: 24px;
-					border: 2px solid $color-accent;
+					border: 2px solid var(--unactive-color);
 					border-radius: 0.75rem;
+				}
+			}
+
+			.item__status:hover {
+				&:before {
+					border-color: $color-accent;
 				}
 			}
 
 			.item__status:checked {
 				&:before {
 					border: none;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					content: url('../assets/img/Path.svg');
+					// background-image: url('../assets/img/Path.svg');
 					background: linear-gradient(135deg, #55ddff 0%, #c058f3 100%);
 				}
 			}
@@ -150,6 +162,13 @@ li {
 				letter-spacing: -0.0156rem;
 				color: var(--text-color);
 				caret-color: $color-accent;
+			}
+		}
+
+		&__item.checked {
+			.item__title {
+				color: var(--unactive-color);
+				text-decoration: line-through;
 			}
 		}
 	}
