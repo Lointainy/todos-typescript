@@ -31,6 +31,24 @@
 		<div class="container">
 			<div class="todos">
 				<ul class="todos-list"></ul>
+				<div class="todos__footer">
+					<div class="todos__total"></div>
+					<ul class="todos__filter">
+						<li class="item">
+							<input class="todos__filter-status" type="radio" name="filter" id="all-todos" value="all" />
+							<label for="all-todos">All</label>
+						</li>
+						<li class="item">
+							<input class="todos__filter-status" type="radio" name="filter" id="active-todos" value="active" />
+							<label for="active-todos">Active</label>
+						</li>
+						<li class="item">
+							<input class="todos__filter-status" type="radio" name="filter" id="completed-todos" value="completed" />
+							<label for="completed-todos">Completed</label>
+						</li>
+					</ul>
+					<button class="todos__remove btn">Clear completed</button>
+				</div>
 			</div>
 		</div>
 		<script type="module" src="/src/main.ts"></script>
