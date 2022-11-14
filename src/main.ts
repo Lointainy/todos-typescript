@@ -18,6 +18,7 @@ let filteredTodos: todoType[] = []
 let category: string[] = ['work', 'home', 'other']
 
 /* Watch */
+todoName?.addEventListener('keypress', handleAddTodo)
 todoCategory?.addEventListener('change', selectedCategory)
 addButton?.addEventListener('click', handleAddTodo)
 todoList?.addEventListener('click', handleChangeTodo)
@@ -55,10 +56,9 @@ const changeTotalTodos = () => {
 }
 
 /* ADD TODO */
-function handleAddTodo() {
+function handleAddTodo({ key, target }: any) {
 	todoName!.value.length < 1 ? (todoName!.placeholder = 'small title') : (todoName!.placeholder = 'add new todos')
-
-	if (todoName!.value.length >= 1) {
+	const createNewTodo = () => {
 		let todoId = getRandomId()
 
 		todos = [...todos, { title: todoName!.value, id: todoId, status: false, category: selectedCategory() }] // push new TODO
@@ -69,10 +69,19 @@ function handleAddTodo() {
 		getTodos()
 
 		todoName!.value = '' //reset input
+
+		defaultFilter!.checked = true
+
+		changeTotalTodos()
 	}
 
-	defaultFilter!.checked = true
-	changeTotalTodos()
+	if (key == 'Enter' && todoName!.value.length >= 1) {
+		createNewTodo()
+	}
+
+	if (target.className == 'todo__btn-add btn' && todoName!.value.length >= 1) {
+		createNewTodo()
+	}
 }
 
 /* CHANGE for TODO */
