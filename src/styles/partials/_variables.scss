@@ -21,3 +21,41 @@ $box-shadow-dark: 0px 35px 50px -15px rgba(0, 0, 0, 0.5);
 
 $gradient: linear-gradient(90deg, rgba(164, 35, 149, 1) 0%, rgba(55, 16, 189, 1) 100%);
 
+/* GRID */
+$container-mw: 1110px !default; // width container
+$container-type: margin;
+$grid-columns: 12 !default; // numbers columns
+$grid-space: 30px; // margin
+$grid-space-side: calc($grid-space / 2); // margin one side
+
+// DON`T TOUCH
+$grid-bp: (
+	xs: 0px,
+	// Extra small screen / phone
+	sm: 576px,
+	// Small screen / phone
+	md: 768px,
+	// Medium screen / tablet
+	lg: 992px,
+	// Large screen / desktop
+	xl: 1200px,
+	// Extra large screen / wide desktop
+	xxl: 1400px,
+	// Extra large screen / wide desktop
+) !default;
+
+$media-value: (
+	mx: max,
+	// desctop first
+	mn: min,
+	// mobile first
+) !default;
+
+//default breakpoits for container width values
+$container-value: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: $container-mw
+);
+
