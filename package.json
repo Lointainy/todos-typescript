@@ -13,5 +13,8 @@
 		"sass": "^1.55.0",
 		"typescript": "^4.6.4",
 		"vite": "^3.2.2"
+	},
+	"dependencies": {
+		"@fontsource/josefin-sans": "^4.5.11"
 	}
 }
