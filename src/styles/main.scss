@@ -15,6 +15,10 @@ li {
 	list-style: none;
 }
 
+button {
+	all: unset;
+}
+
 .container {
 	@include container;
 }
@@ -193,9 +197,11 @@ li {
 .todos__filter {
 	display: flex;
 	gap: 1rem;
+
 	&-status {
 		all: unset;
 	}
+
 	labeL {
 		transition: $animate;
 		cursor: pointer;
@@ -204,8 +210,19 @@ li {
 			color: var(--text-color);
 		}
 	}
+
 	&-status:checked ~ label {
 		color: $color-accent;
+	}
+}
+
+.todos__remove {
+	cursor: pointer;
+	color: var(--unactive-color);
+	transition: $animate;
+
+	&:hover {
+		color: var(--text-color);
 	}
 }
 
